@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Math Class</title>
+<style>
+:root{--bg:#080f20;--panel:#111e34;--panel2:#192b47;--blue:#3989ff;--cyan:#53d6e8;--text:#f3f7ff;--muted:#9aabc5;--line:#2a3d5c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial;padding-bottom:85px}
+button,input,textarea{font-family:inherit}
+button{cursor:pointer;border:0}
+.hidden{display:none!important}
+.top{position:sticky;top:0;z-index:10;background:#0c172bf5;backdrop-filter:blur(15px);border-bottom:1px solid var(--line);padding:13px 15px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.brand{font-size:20px;font-weight:900}.brand span,.authlogo span{color:var(--cyan)}
+.top small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.top-actions{display:flex;align-items:center;gap:7px}
+.adminBtn{background:linear-gradient(120deg,#235db4,#3989ff);color:white;border:1px solid #70aaff;border-radius:11px;padding:11px 12px;font-size:12px;font-weight:bold;box-shadow:0 4px 15px #2674e844}
+.iconbtn{background:var(--panel2);color:white;border:1px solid var(--line);border-radius:11px;padding:10px;font-size:17px}
+main{max-width:850px;margin:auto;padding:18px 15px}
+.hero{padding:25px 22px;border-radius:22px;background:linear-gradient(125deg,#173c76,#126c9b,#172b50);margin-bottom:18px;border:1px solid #4a9df966;position:relative;overflow:hidden}
+.hero h1{font-size:24px}.hero p{font-size:12px;color:#d7eaff;line-height:2}
+.eyebrow{color:var(--cyan);font-size:11px;font-weight:bold;letter-spacing:1px}
+.title{font-size:18px;margin:25px 0 13px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:linear-gradient(145deg,#15243d,#101b30);border:1px solid var(--line);border-radius:17px;padding:16px;margin-bottom:12px}
+.card h3{font-size:14px;margin:0 0 10px}
+.card p,.muted{font-size:12px;color:var(--muted);line-height:2}
+.tile{min-height:110px;cursor:pointer}
+.tile .emoji{font-size:25px;margin-bottom:12px}
+.tile b{font-size:13px;display:block}.tile small{font-size:10px;color:var(--muted);display:block;margin-top:7px}
+input,textarea{width:100%;padding:13px;border-radius:11px;border:1px solid var(--line);background:#0b1629;color:white;font-size:13px;outline:none;margin:7px 0 13px}
+textarea{min-height:95px;resize:vertical}
+label{font-size:12px;color:#c7d5eb}
+.btn{padding:12px 16px;border-radius:11px;background:linear-gradient(110deg,#2674e8,#319bdc);color:white;font-weight:bold;font-size:12px}
+.btn.full{width:100%}.btn.gray{background:#263752}.btn.green{background:#137d62}.btn.red{background:#8e2d43}
+.notice,.item{padding:13px;background:#132c4a;border:1px solid #28517d;border-radius:12px;margin:9px 0;font-size:12px;line-height:2}
+.item{background:#101e33;border-color:var(--line)}
+.item strong{color:#d8eaff}.item small{color:var(--muted);display:block}
+.pill{display:inline-block;padding:5px 9px;border-radius:20px;background:#203c5c;color:#a8d5ff;font-size:10px}
+.stat{background:#14243c;border:1px solid var(--line);padding:14px;border-radius:14px;text-align:center}
+.stat strong{font-size:22px;display:block;color:var(--cyan)}.stat small{font-size:10px;color:var(--muted)}
+.bottom{position:fixed;bottom:0;left:0;right:0;z-index:20;background:#0c172bf5;backdrop-filter:blur(18px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:9px 3px calc(9px + env(safe-area-inset-bottom))}
+.nav{background:none;color:#8295b2;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:5px;min-width:48px;padding:4px}
+.nav span{font-size:20px}.nav.active{color:#65baff}
+.auth{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at 20% 20%,#174b79,#080f20 65%)}
+.authbox{max-width:420px;width:100%;padding:26px;background:#111e34;border:1px solid #314967;border-radius:23px;box-shadow:0 25px 70px #0008}
+.authlogo{font-size:27px;font-weight:900;margin-bottom:10px}
+.authbox h1{font-size:22px}.link{color:#66baff;cursor:pointer;font-size:12px}
+.center{text-align:center}.empty{text-align:center;padding:25px;color:var(--muted);font-size:12px}
+footer{text-align:center;color:#7185a3;font-size:10px;padding:25px}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+
+<section id="auth" class="auth">
+ <div class="authbox">
+  <div class="authlogo">MATH <span>CLASS</span></div>
+  <div class="eyebrow">EDUCATION MANAGEMENT SYSTEM</div>
+  <div id="registerBox">
+   <h1>ساخت حساب جدید</h1>
+   <p class="muted">به سامانه اختصاصی کلاس ریاضی خوش آمدید.</p>
+   <label>نام و نام خانوادگی</label><input id="rName" placeholder="نام کامل">
+   <label>نام کاربری</label><input id="rUser" placeholder="نام کاربری دلخواه">
+   <label>رمز عبور</label><input id="rPass" type="password" placeholder="حداقل ۶ کاراکتر">
+   <label>تکرار رمز عبور</label><input id="rPass2" type="password" placeholder="تکرار رمز">
+   <button class="btn full" onclick="register()">ساخت حساب و ورود ←</button>
+   <p class="center muted">قبلاً حساب ساخته‌ای؟ <span class="link" onclick="showAuth('login')">وارد شو</span></p>
+  </div>
+  <div id="loginBox" class="hidden">
+   <h1>ورود به حساب</h1>
+   <p class="muted">اطلاعات حساب خود را وارد کنید.</p>
+   <label>نام کاربری</label><input id="lUser" placeholder="نام کاربری">
+   <label>رمز عبور</label><input id="lPass" type="password" placeholder="رمز عبور">
+   <button class="btn full" onclick="login()">ورود به Math Class</button>
+   <p class="center muted">حساب نداری؟ <span class="link" onclick="showAuth('register')">ثبت‌نام کن</span></p>
+  </div>
+  <div id="authMessage" class="muted"></div>
+ </div>
+</section>
+
+<div id="app" class="hidden">
+<header class="top">
+ <div><div class="brand">MATH <span>CLASS</span></div><small>سامانه هوشمند کلاس ریاضی</small></div>
+ <div class="top-actions">
+  <button class="adminBtn" onclick="openAdmin()">⚙️ پنل مدیریتی</button>
+  <button class="iconbtn" onclick="logout()">↪</button>
+ </div>
+</header>
+<main id="view"></main>
+<nav class="bottom" id="bottomNav">
+ <button class="nav active" onclick="go('home',this)"><span>⌂</span>خانه</button>
+ <button class="nav" onclick="go('news',this)"><span>📢</span>اخبار</button>
+ <button class="nav" onclick="go('ticket',this)"><span>✉️</span>تیکت</button>
+ <button class="nav" onclick="go('comments',this)"><span>⭐</span>نظرات</button>
+ <button class="nav" onclick="go('leaderLogin',this)"><span>👥</span>سرگروه</button>
+ <button class="nav" onclick="go('profile',this)"><span>◉</span>حساب</button>
+</nav>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const read=(k,d=[])=>{try{return JSON.parse(localStorage.getItem("mc_"+k))??d}catch(e){return d}};
+const write=(k,v)=>localStorage.setItem("mc_"+k,JSON.stringify(v));
+const safe=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let current=null,leaderSession=null;
+
+function showAuth(type){
+ $("registerBox").classList.toggle("hidden",type!=="register");
+ $("loginBox").classList.toggle("hidden",type!=="login");
+ $("authMessage").textContent="";
+}
+function register(){
+ let name=$("rName").value.trim(),user=$("rUser").value.trim(),pass=$("rPass").value,pass2=$("rPass2").value,users=read("users");
+ if(!name||!user||!pass||!pass2)return msg("همه قسمت‌ها را پر کنید.");
+ if(user.length<3)return msg("نام کاربری باید حداقل ۳ حرف باشد.");
+ if(pass.length<6)return msg("رمز باید حداقل ۶ کاراکتر باشد.");
+ if(pass!==pass2)return msg("رمزها یکسان نیستند.");
+ if(users.some(x=>x.user.toLowerCase()===user.toLowerCase()))return msg("این نام کاربری قبلاً ثبت شده است.");
+ users.push({name,user,pass});write("users",users);
+ current=user;localStorage.setItem("mc_current",user);enterApp();
+}
+function login(){
+ let u=$("lUser").value.trim(),p=$("lPass").value;
+ let found=read("users").find(x=>x.user.toLowerCase()===u.toLowerCase()&&x.pass===p);
+ if(!found)return msg("نام کاربری یا رمز اشتباه است.");
+ current=found.user;localStorage.setItem("mc_current",current);enterApp();
+}
+function msg(t){$("authMessage").textContent=t}
+function enterApp(){
+ $("auth").classList.add("hidden");$("app").classList.remove("hidden");go("home");
+}
+function logout(){
+ current=null;leaderSession=null;localStorage.removeItem("mc_current");
+ $("app").classList.add("hidden");$("auth").classList.remove("hidden");showAuth("login");
+}
+function go(page,btn){
+ leaderSession=null;
+ document.querySelectorAll(".nav").forEach(x=>x.classList.remove("active"));
+ if(btn)btn.classList.add("active");
+ else{
+  const m={home:0,news:1,ticket:2,comments:3,leaderLogin:4,profile:5};
+  document.querySelectorAll(".nav")[m[page]??0]?.classList.add("active");
+ }
+ render(page);
+}
+function render(page){
+ let user=read("users").find(x=>x.user===current);if(!user)return logout();
+ let v=$("view");
+ if(page==="home")v.innerHTML=`
+ <div class="hero"><small>WELCOME BACK</small><h1>سلام، ${safe(user.name)} 👋</h1><p>به فضای اختصاصی کلاس ریاضی خوش آمدی. از بخش‌های مختلف سامانه استفاده کن.</p><span class="pill">عضو Math Class</span></div>
+ <div class="grid"><div class="stat"><strong>${read("users").length}</strong><small>کاربران این دستگاه</small></div><div class="stat"><strong>${read("leaders").length}</strong><small>سرگروه‌ها</small></div></div>
+ <h2 class="title">دسترسی سریع</h2><div class="grid">
+ ${tile("📢","اطلاعیه‌ها","خبرهای کلاس","news")}
+ ${tile("✉️","ثبت تیکت","ارتباط با مدیریت","ticket")}
+ ${tile("⭐","نظرات","دیدگاه دانش‌آموزان","comments")}
+ ${tile("👥","ورود سرگروه","پنل اختصاصی","leaderLogin")}
+ ${tile("📚","تکالیف","گزارش‌های آموزشی","homework")}
+ ${tile("🏅","فعالیت‌ها","فعالیت‌های مثبت","activities")}</div>
+ <h2 class="title">آخرین اطلاعیه</h2>${newsHTML(3)}`;
+ if(page==="news")v.innerHTML=`<h2 class="title">📢 اطلاعیه‌های کلاس</h2>${newsHTML(100)}`;
+ if(page==="ticket")v.innerHTML=`<h2 class="title">✉️ ثبت تیکت</h2><div class="card"><p class="muted">پیام شما در پنل مدیریت ثبت می‌شود.</p><label>موضوع</label><input id="ticketSubject" placeholder="موضوع پیام"><label>متن پیام</label><textarea id="ticketText" placeholder="پیام خود را بنویسید"></textarea><button class="btn full" onclick="sendTicket()">ارسال تیکت</button></div><h2 class="title">تیکت‌های من</h2>${myTickets()}`;
+ if(page==="comments")v.innerHTML=`<h2 class="title">⭐ دیوار نظرات کلاس</h2><div class="card"><p class="muted">نظر شما برای همه کاربران قابل مشاهده است.</p><textarea id="commentText" placeholder="نظر شما..."></textarea><button class="btn full" onclick="sendComment()">انتشار نظر</button></div>${commentsHTML()}`;
+ if(page==="leaderLogin")v.innerHTML=`<h2 class="title">🔐 ورود سرگروه‌ها</h2><div class="card"><p class="muted">با نام کاربری و رمز اختصاصی وارد شوید.</p><label>نام کاربری</label><input id="leaderUser" placeholder="نام کاربری"><label>رمز عبور</label><input id="leaderPass" type="password" placeholder="رمز اختصاصی"><button class="btn full" onclick="leaderLogin()">ورود به پنل سرگروه</button></div><h2 class="title">لیست سرگروه‌ها</h2>${leadersHTML()}`;
+ if(page==="leaderPanel")renderLeader();
+ if(page==="homework")v.innerHTML=`<h2 class="title">📚 تکالیف ثبت‌شده</h2>${reportsHTML("homework")}`;
+ if(page==="activities")v.innerHTML=`<h2 class="title">🏅 فعالیت‌های مثبت</h2>${reportsHTML("activity")}`;
+ if(page==="profile")v.innerHTML=`<h2 class="title">حساب کاربری</h2><div class="card"><div class="eyebrow">MY ACCOUNT</div><h2>${safe(user.name)}</h2><p class="muted">نام کاربری: ${safe(user.user)}</p><span class="pill">دانش‌آموز</span><hr><button class="btn red full" onclick="logout()">خروج از حساب</button></div>`;
+}
+function tile(i,t,s,p){return `<div class="card tile" onclick="go('${p}')"><div class="emoji">${i}</div><b>${t}</b><small>${s}</small></div>`}
+function newsHTML(n){let a=read("news").slice().reverse().slice(0,n);return a.length?a.map(x=>`<div class="notice"><b>${safe(x.title)}</b><br>${safe(x.text)}<small class="muted"><br>${safe(x.date)}</small></div>`).join(""):'<div class="empty">هنوز اطلاعیه‌ای ثبت نشده است.</div>'}
+function sendTicket(){
+ let subject=$("ticketSubject").value.trim(),text=$("ticketText").value.trim();
+ if(!subject||!text)return alert("موضوع و متن تیکت را وارد کنید.");
+ let a=read("tickets");a.push({user:current,subject,text,date:new Date().toLocaleString("fa-IR"),status:"جدید"});write("tickets",a);alert("تیکت ثبت شد.");go("ticket");
+}
+function myTickets(){let a=read("tickets").filter(x=>x.user===current).reverse();return a.length?a.map(x=>`<div class="item"><strong>${safe(x.subject)}</strong><small>${safe(x.date)} | ${safe(x.status)}</small>${safe(x.text)}</div>`).join(""):'<div class="empty">هنوز تیکتی ثبت نکرده‌اید.</div>'}
+function sendComment(){
+ let text=$("commentText").value.trim();if(!text)return alert("نظر خود را بنویسید.");
+ let a=read("comments");a.push({user:current,text,date:new Date().toLocaleString("fa-IR")});write("comments",a);alert("نظر منتشر شد.");go("comments");
+}
+function commentsHTML(){let a=read("comments").slice().reverse();return a.length?a.map(x=>`<div class="item"><strong>⭐ ${safe(x.user)}</strong><small>${safe(x.date)}</small>${safe(x.text)}</div>`).join(""):'<div class="empty">هنوز نظری ثبت نشده است.</div>'}
+function leadersHTML(){let a=read("leaders");return a.length?a.map(x=>`<div class="item"><strong>👤 ${safe(x.name)}</strong><small>گروه: ${safe(x.group)}</small></div>`).join(""):'<div class="empty">هنوز سرگروهی تعریف نشده است.</div>'}
+function leaderLogin(){
+ let u=$("leaderUser").value.trim(),p=$("leaderPass").value;
+ let found=read("leaders").find(x=>x.user===u&&x.pass===p);
+ if(!found)return alert("نام کاربری یا رمز سرگروه اشتباه است.");
+ leaderSession=found.user;render("leaderPanel");
+}
+function renderLeader(){
+ let l=read("leaders").find(x=>x.user===leaderSession);if(!l)return go("leaderLogin");
+ $("view").innerHTML=`<div class="hero"><small>LEADER CONTROL PANEL</small><h1>پنل سرگروه ${safe(l.name)}</h1><p>گروه: ${safe(l.group)}</p></div>
+ <div class="card"><h3>📚 ثبت تکلیف دانش‌آموز</h3><label>نام دانش‌آموز</label><input id="hwStudent" placeholder="نام دانش‌آموز"><label>توضیحات تکلیف</label><textarea id="hwText" placeholder="تکلیف یا وضعیت انجام آن"></textarea><button class="btn full" onclick="sendReport('homework')">ارسال تکلیف به مدیریت</button></div>
+ <div class="card"><h3>🏅 ثبت فعالیت مثبت</h3><label>نام دانش‌آموز</label><input id="actStudent" placeholder="نام دانش‌آموز"><label>نوع فعالیت</label><input id="actText" placeholder="مثلاً همکاری، تلاش، نظم"><label>امتیاز</label><input id="actPoints" type="number" min="1" max="100" placeholder="مثلاً ۵"><button class="btn green full" onclick="sendReport('activity')">ارسال فعالیت به مدیریت</button></div>
+ <h2 class="title">گزارش‌های ارسال‌شده من</h2>${read("reports").filter(x=>x.leader===leaderSession).reverse().map(reportHTML).join("")||'<div class="empty">هنوز گزارشی ارسال نکرده‌ای.</div>'}
+ <button class="btn gray full" onclick="leaderSession=null;go('leaderLogin')">خروج از پنل سرگروه</button>`;
+}
+function sendReport(type){
+ let student=$(type==="homework"?"hwStudent":"actStudent").value.trim(),text=$(type==="homework"?"hwText":"actText").value.trim(),points=type==="activity"?Number($("actPoints").value):0;
+ if(!student||!text)return alert("نام دانش‌آموز و توضیحات را وارد کنید.");
+ if(type==="activity"&&(!Number.isInteger(points)||points<1||points>100))return alert("امتیاز باید بین ۱ تا ۱۰۰ باشد.");
+ let a=read("reports");a.push({type,student,text,points,leader:leaderSession,group:read("leaders").find(x=>x.user===leaderSession)?.group||"",date:new Date().toLocaleString("fa-IR")});write("reports",a);alert("گزارش برای مدیریت ثبت شد.");renderLeader();
+}
+function reportHTML(x){return `<div class="item"><strong>${x.type==="homework"?"📚 تکلیف":"🏅 فعالیت مثبت"} | ${safe(x.student)}</strong><small>سرگروه: ${safe(x.leader)} | ${safe(x.date)}</small>${safe(x.text)}${x.type==="activity"?"<br><b>امتیاز: "+safe(x.points)+"</b>":""}</div>`}
+function reportsHTML(type){let a=read("reports").filter(x=>x.type===type).reverse();return a.length?a.map(reportHTML).join(""):'<div class="empty">هنوز گزارشی ثبت نشده است.</div>'}
+
+/* ADMIN LOGIN - صفحه اختصاصی رمز و دکمه ورود */
+function openAdmin(){
+ const old=$("adminLogin");if(old)old.remove();
+ const box=document.createElement("div");
+ box.id="adminLogin";box.className="auth";
+ box.style.position="fixed";box.style.inset="0";box.style.zIndex="100";
+ box.innerHTML=`
+ <div class="authbox">
+  <div class="authlogo">MATH <span>CLASS</span></div>
+  <div class="eyebrow">ADMINISTRATION ACCESS</div>
+  <h1>ورود به پنل مدیریتی</h1>
+  <p class="muted">برای دسترسی به مدیریت، رمز عبور را وارد کنید.</p>
+  <label>رمز عبور مدیریت</label>
+  <input id="adminPasswordInput" type="password" placeholder="رمز مدیریت">
+  <button class="btn full" id="adminEnterBtn">ورود به پنل مدیریت ←</button>
+  <button class="btn gray full" style="margin-top:10px" id="adminCancelBtn">بازگشت به سایت</button>
+  <p id="adminError" class="muted"></p>
+ </div>`;
+ document.body.appendChild(box);
+ $("adminEnterBtn").onclick=function(){
+  if($("adminPasswordInput").value==="Salom"){
+   box.remove();renderAdmin();
+  }else{$("adminError").textContent="رمز اشتباه است. دوباره تلاش کنید."}
+ };
+ $("adminCancelBtn").onclick=()=>box.remove();
+ $("adminPasswordInput").addEventListener("keydown",e=>{if(e.key==="Enter")$("adminEnterBtn").click()});
+}
+function renderAdmin(){
+ $("bottomNav").classList.add("hidden");
+ $("view").innerHTML=`
+ <div class="row"><div><div class="eyebrow">ADMINISTRATION</div><h2>پنل مدیریت</h2></div><button class="btn gray" onclick="closeAdmin()">بازگشت</button></div>
+ <div class="grid">
+ <div class="stat"><strong>${read("users").length}</strong><small>کاربران</small></div>
+ <div class="stat"><strong>${read("leaders").length}</strong><small>سرگروه‌ها</small></div>
+ <div class="stat"><strong>${read("tickets").length}</strong><small>تیکت‌ها</small></div>
+ <div class="stat"><strong>${read("reports").length}</strong><small>گزارش‌ها</small></div></div>
+ <h2 class="title">📢 انتشار اطلاعیه</h2>
+ <div class="card"><input id="newsTitle" placeholder="عنوان اطلاعیه"><textarea id="newsBody" placeholder="متن اطلاعیه برای همه کاربران"></textarea><button class="btn full" onclick="adminPublish()">انتشار برای همه</button></div>
+ <h2 class="title">👥 ساخت حساب سرگروه</h2>
+ <div class="card"><label>نام سرگروه</label><input id="newLeaderName" placeholder="نام کامل"><label>نام گروه</label><input id="newLeaderGroup" placeholder="مثلاً گروه اول"><label>نام کاربری</label><input id="newLeaderUser" placeholder="نام کاربری اختصاصی"><label>رمز عبور</label><input id="newLeaderPass" placeholder="رمز اختصاصی"><button class="btn full" onclick="createLeader()">ساخت حساب سرگروه</button></div>
+ <h2 class="title">📋 سرگروه‌ها</h2>${adminLeaders()}
+ <h2 class="title">👤 کاربران</h2>${adminUsers()}
+ <h2 class="title">✉️ تیکت‌های دریافتی</h2>${adminTickets()}
+ <h2 class="title">⭐ نظرات عمومی</h2>${adminComments()}
+ <h2 class="title">📚 گزارش تکالیف و فعالیت‌ها</h2>${adminReports()}`;
+}
+function closeAdmin(){$("bottomNav").classList.remove("hidden");go("home")}
+function adminPublish(){
+ let title=$("newsTitle").value.trim(),text=$("newsBody").value.trim();if(!title||!text)return alert("عنوان و متن را وارد کنید.");
+ let a=read("news");a.push({title,text,date:new Date().toLocaleString("fa-IR")});write("news",a);alert("اطلاعیه منتشر شد.");renderAdmin();
+}
+function createLeader(){
+ let name=$("newLeaderName").value.trim(),group=$("newLeaderGroup").value.trim(),user=$("newLeaderUser").value.trim(),pass=$("newLeaderPass").value;
+ if(!name||!group||!user||!pass)return alert("همه قسمت‌ها را پر کنید.");
+ if(pass.length<4)return alert("رمز حداقل ۴ کاراکتر باشد.");
+ let a=read("leaders");if(a.some(x=>x.user.toLowerCase()===user.toLowerCase()))return alert("نام کاربری تکراری است.");
+ a.push({name,group,user,pass});write("leaders",a);alert("سرگروه ساخته شد.");renderAdmin();
+}
+function adminLeaders(){
+ let a=read("leaders");return a.length?a.map(x=>`<div class="item"><strong>${safe(x.name)}</strong><small>گروه: ${safe(x.group)} | نام کاربری: ${safe(x.user)}</small><small>رمز: ${safe(x.pass)}</small><button class="btn red" onclick="deleteLeader('${safe(x.user)}')">حذف سرگروه</button></div>`).join(""):'<div class="empty">سرگروهی وجود ندارد.</div>';
+}
+function deleteLeader(u){if(!confirm("سرگروه حذف شود؟"))return;write("leaders",read("leaders").filter(x=>x.user!==u));renderAdmin()}
+function adminUsers(){let a=read("users");return a.length?a.map(x=>`<div class="item"><strong>${safe(x.name)}</strong><small>نام کاربری: ${safe(x.user)}</small></div>`).join(""):'<div class="empty">کاربری ثبت نشده است.</div>'}
+function adminTickets(){
+ let a=read("tickets");return a.length?a.map((x,i)=>`<div class="item"><strong>${safe(x.subject)}</strong><small>فرستنده: ${safe(x.user)} | ${safe(x.date)}</small>${safe(x.text)}<br><span class="pill">${safe(x.status)}</span><button class="btn green" onclick="resolveTicket(${i})">بررسی شد</button></div>`).reverse().join(""):'<div class="empty">تیکتی وجود ندارد.</div>';
+}
+function resolveTicket(i){let a=read("tickets");if(a[i])a[i].status="بررسی‌شده";write("tickets",a);renderAdmin()}
+function adminComments(){
+ let a=read("comments");return a.length?a.map((x,i)=>`<div class="item"><strong>${safe(x.user)}</strong><small>${safe(x.date)}</small>${safe(x.text)}<br><button class="btn red" onclick="deleteComment(${i})">حذف نظر</button></div>`).reverse().join(""):'<div class="empty">نظری وجود ندارد.</div>';
+}
+function deleteComment(i){let a=read("comments");a.splice(i,1);write("comments",a);renderAdmin()}
+function adminReports(){
+ let a=read("reports");return a.length?a.map((x,i)=>reportHTML(x)+`<button class="btn red" onclick="deleteReport(${i})">حذف گزارش</button>`).reverse().join(""):'<div class="empty">گزارشی وجود ندارد.</div>';
+}
+function deleteReport(i){let a=read("reports");a.splice(i,1);write("reports",a);renderAdmin()}
+function start(){
+ let saved=localStorage.getItem("mc_current"),found=read("users").find(x=>x.user===saved);
+ if(found){current=found.user;enterApp()}else showAuth("register");
+}
+start();
+</script>
+</body>
+</html>
